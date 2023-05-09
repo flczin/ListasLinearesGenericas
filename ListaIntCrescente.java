@@ -7,7 +7,7 @@ public class ListaIntCrescente {
 
     private NO lista = null;
 
-    public void insere(int elem){
+    public void insert(int elem){
         NO novo = new NO();
         novo.dado = elem;
         if (lista == null){
@@ -33,10 +33,54 @@ public class ListaIntCrescente {
         }
     }
 
-    public void apresenta(){
+    public boolean remove(int elem){
+        boolean achou = false;
+        if (lista != null){
+            if (lista.dado == elem){
+                achou = true;
+                lista = lista.prox;
+            }else {
+                NO aux = lista;
+                while (aux.prox != null && !achou) {
+                    if (aux.prox.dado != elem) {
+                        aux = aux.prox;
+                    } else {
+                        achou = true;
+                        aux.prox = aux.prox.prox;
+                    }
+                }
+            }
+        }else {
+            System.out.println("Lista está vazia!");
+        }
+        return achou;
+    }
+
+    public int length(){
+        int cont = 0;
         NO aux = lista;
-        System.out.println("\n\n ***** Lista *****");
-        while (aux!=null){
+        while (aux != null){
+            cont++;
+            aux = aux.prox;
+        }
+        return cont;
+    }
+
+    public void showBigger(int elem){
+        NO aux = lista;
+        System.out.println("*****Maiores que " + elem + "*****");
+        while (aux != null){
+            if (aux.dado > elem){
+                System.out.println("\t" + aux.dado);
+            }
+            aux = aux.prox;
+        }
+    }
+
+    public void show(){
+        NO aux = lista;
+        System.out.println("***** Lista *****");
+        while (aux != null){
             System.out.println("\t" + aux.dado);
             aux = aux.prox;
         }
